@@ -76,11 +76,12 @@ def crop_image(frame, rectangle):
 
 """
 main to test image cropping
+"""
 if __name__ == '__main__':
 	try:
 		frame = cv2.imread('images/example_01.jpg')
 	except Exception as e:
 		print str(e)
 	rect = draw_rectangle(frame)
-	crop_image(frame, 'images/abc.jpg', rect)
-"""
+	crop_image(frame, 'images/cropped.jpg', rect)
+

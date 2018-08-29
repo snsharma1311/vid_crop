@@ -25,7 +25,8 @@ def mouse_callback(event, x, y, flags, param):
 		cv2.imshow(param[2],img)
 
 """
-draw rectangle on to input frame/image
+draw rectangle on to input frame/image 
+returns diagonal points of the rectangle
 frame: input image
 press 'q' to quit
 """
@@ -42,8 +43,16 @@ def draw_rectangle(frame):
 	while True:
 		if cv2.waitKey(1) & 0xFF == ord("q"):
         		break
-	cv2.rectangle(frame, param[3], param[4], param[1])
-	cv2.imshow('final', frame)
+	return [param[3], param[4]]
+
+"""
+takes image, des_path and rectangle as a input and saves cropped image 
+rectangle[0]: top left
+rectangle[1]: bottom right
+"""
+def crop_image(frame, des_path, rectangle):
+	crop = frame[rectangle[0][1]:rectangle[1][1],rectangle[0][0]:rectangle[1][0]]
+	cv2.imshow('cropped', crop)
 	cv2.waitKey(0)
 
 if __name__ == '__main__':
@@ -51,5 +60,6 @@ if __name__ == '__main__':
 		frame = cv2.imread('images/example_01.jpg')
 	except Exception as e:
 		print str(e)
-	draw_rectangle(frame)
+	rect = draw_rectangle(frame)
+	crop_image(frame, 'images/abc.jpg', rect)
 

@@ -21,7 +21,7 @@ For other prerequisites follow the instructions:
 sudo apt-get update \
 sudo apt-get install python-pip 
 2. Install virtualenv \
-sudo pip install virtualenv  \
+sudo pip install virtualenv  
 3. Setup virtual enviornment 
 Download source files in to a folder (use git clone or download ZIP) \
 cd path/to/downloaded/folder \

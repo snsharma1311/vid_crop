@@ -1,3 +1,8 @@
+"""
+Filename: imagecrop.py
+Usage: Contains utility functions to crop any image/frame
+Author: Shashank Sharma
+"""
 import cv2
 
 """
@@ -5,6 +10,9 @@ mouse callback function.
 param[0]: image
 param[1]: color
 param[2]: window_name
+param[3]: start point
+param[4]: end point
+param[4]: bool which tell if left mouse button is down
 left click down: (xs, ys) starting point
 mouse move: (x', y') intermediate points draw rectangle using (xs, ys, x', y')
 left click up: (xe, ye) end points draw final rectangle
@@ -31,7 +39,7 @@ frame: input image
 press 'q' to quit
 """
 def draw_rectangle(frame):
-	window_name = "press 'q' after done"
+	window_name = "Select ROI, press 'q' after done"
 	cv2.namedWindow(window_name)
 	color = (0, 0, 0) #black
 	start_point = (0, 0) #(xs, ys)
@@ -43,6 +51,7 @@ def draw_rectangle(frame):
 	while True:
 		if cv2.waitKey(1) & 0xFF == ord("q"):
         		break
+	cv2.destroyAllWindows()
 	return [param[3], param[4]]
 
 """
@@ -50,11 +59,23 @@ takes image, des_path and rectangle as a input and saves cropped image
 rectangle[0]: top left
 rectangle[1]: bottom right
 """
-def crop_image(frame, des_path, rectangle):
-	crop = frame[rectangle[0][1]:rectangle[1][1],rectangle[0][0]:rectangle[1][0]]
-	cv2.imshow('cropped', crop)
-	cv2.waitKey(0)
+def crop_and_save_image(frame, des_path, rectangle):
+	if rectangle[0] == rectangle[1]:
+		cv2.imwrite(des_path, frame) #if end point and start point is same save whole frame
+		return	
+	crop = crop_image(frame, rectangle)
+	cv2.imwrite(des_path, crop)
 
+"""
+function takes image and diagonal points and returns cropped image
+rectangle[0]: top left
+rectangle[1]: bottom right
+"""
+def crop_image(frame, rectangle):
+	return frame[rectangle[0][1]:rectangle[1][1],rectangle[0][0]:rectangle[1][0]]
+
+"""
+main to test image cropping
 if __name__ == '__main__':
 	try:
 		frame = cv2.imread('images/example_01.jpg')
@@ -62,4 +83,4 @@ if __name__ == '__main__':
 		print str(e)
 	rect = draw_rectangle(frame)
 	crop_image(frame, 'images/abc.jpg', rect)
-
+"""

@@ -4,7 +4,7 @@ The project contains sample codes to select ROIs in images and videos
 
 ## Getting Started
 
-### Prerequisites
+## Prerequisites
 
 Python 2.7
 Pip
@@ -12,9 +12,9 @@ Virtualenv
 OpenCV
 Numpy
 
-### Installing
+## Installing
 
-###Ubuntu 16.04
+##Ubuntu 16.04
 Python 2.7 is available by default
 For other prerequisites follow the instructions:
 1. Install Pip
@@ -33,11 +33,11 @@ pip install -r requirements.txt
 
 ## Running the tests
 
-###For Images
+##For Images
 python image_crop.py
 * It will take an image from images folder and save the cropped image as cropped.jpg in to same folder
 
-###For Videos
+##For Videos
 python video_crop.py
 * It will take an sample video from video folder and save the cropped video as cropped.avi in to same folder
 
